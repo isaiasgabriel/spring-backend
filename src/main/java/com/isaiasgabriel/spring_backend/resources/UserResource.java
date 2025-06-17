@@ -1,4 +1,4 @@
-package com.isaiasgabriel.spring_backend.services;
+package com.isaiasgabriel.spring_backend.resources;
 
 import com.isaiasgabriel.spring_backend.entities.User;
 import org.springframework.http.ResponseEntity;
