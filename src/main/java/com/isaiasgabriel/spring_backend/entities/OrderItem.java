@@ -1,5 +1,6 @@
 package com.isaiasgabriel.spring_backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.isaiasgabriel.spring_backend.entities.pk.OrderItemPK;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -30,6 +31,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
     }

@@ -1,15 +1,8 @@
 package com.isaiasgabriel.spring_backend.config;
 
-import com.isaiasgabriel.spring_backend.entities.Category;
-import com.isaiasgabriel.spring_backend.entities.Order;
-import com.isaiasgabriel.spring_backend.entities.Product;
-import com.isaiasgabriel.spring_backend.entities.User;
+import com.isaiasgabriel.spring_backend.entities.*;
 import com.isaiasgabriel.spring_backend.entities.enums.OrderStatus;
-import com.isaiasgabriel.spring_backend.repositories.CategoryRepository;
-import com.isaiasgabriel.spring_backend.repositories.OrderRepository;
-import com.isaiasgabriel.spring_backend.repositories.ProductRepository;
-import com.isaiasgabriel.spring_backend.repositories.UserRepository;
-import org.aspectj.weaver.ast.Or;
+import com.isaiasgabriel.spring_backend.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -36,6 +29,9 @@ public class TestProfileConfig implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
 
     @Override
@@ -69,5 +65,13 @@ public class TestProfileConfig implements CommandLineRunner {
         orderRepository.saveAll(Arrays.asList(o1, o2, o3));
         categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+
+        OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+        OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+        OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+        OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+
+        orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));
+
     }
 }
