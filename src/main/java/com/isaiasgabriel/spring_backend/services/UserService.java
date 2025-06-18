@@ -26,4 +26,8 @@ public class UserService {
         // TODO: If there's no user inside the Optional object it'll throw an error
         // TODO: So we need to threat this error
     }
+
+    public User insert(User obj){
+        return repository.save(obj);
+    }
 }
