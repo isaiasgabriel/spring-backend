@@ -34,6 +34,13 @@ public class Order implements Serializable {
    @OneToMany(mappedBy = "id.order")
    private Set<OrderItem> items = new HashSet<>();
 
+    // mappedBy: explicitly states that "order" refers to the 'order' attribute in the Payment class,
+    //          indicating Payment is the owning side of the relationship.
+    // cascade: applies persistence operations (e.g., save, delete) from Order to Payment,
+    //          and, combined with @MapsId in Payment, ensures they share the same ID.
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
+
     public Order() {};
 
     public Order(Long id, Instant moment, OrderStatus status ,User client) {
@@ -41,6 +48,14 @@ public class Order implements Serializable {
         this.moment = moment;
         setOrderStatus(status);
         this.client = client;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     public OrderStatus getOrderStatus() {
