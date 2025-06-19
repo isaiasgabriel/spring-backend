@@ -2,6 +2,7 @@ package com.isaiasgabriel.spring_backend.services;
 
 import com.isaiasgabriel.spring_backend.entities.User;
 import com.isaiasgabriel.spring_backend.repositories.UserRepository;
+import com.isaiasgabriel.spring_backend.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,9 +23,7 @@ public class UserService {
 
     public User findUserById(Long id) {
         Optional<User> user = repository.findById(id);
-        return user.get();
-        // TODO: If there's no user inside the Optional object it'll throw an error
-        // TODO: So we need to threat this error
+        return user.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public User insert(User obj){
